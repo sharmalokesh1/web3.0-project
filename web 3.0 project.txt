@@ -1,0 +1,61 @@
+Write the differences between Web3.js and Ether.js. 2) Demonstrate how to read data from the Smart Contract with the
+help of Web3.js.
+
+
+Web3.js:
+
+Web3.js is a JavaScript library that allows interaction with Ethereum nodes using the JSON-RPC protocol.
+It is a general-purpose library for Ethereum development, providing a wide range of functionalities for working with smart contracts, transactions, accounts, and more.
+Web3.js is not specific to any particular Ethereum-based blockchain and can be used with any Ethereum-compatible network.
+
+
+
+Ether.js:
+
+Ether.js is a more focused and lightweight library specifically designed for interacting with Ethereum blockchains.
+It is built using TypeScript and provides a simplified and more intuitive API compared to Web3.js.
+Ether.js is often considered more developer-friendly and provides a more modular structure for Ethereum-related operations.
+
+
+Demonstrating how to read data from a Smart Contract using Web3.js:
+
+Install Web3.js:
+
+npm install web3
+
+
+Create a JavaScript file
+
+const Web3 = require('web3');
+
+const web3 = new Web3('http://localhost:8545');
+
+const contractAddress = 'YourContractAddress';
+const contractABI = [
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "getData",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }
+];
+
+const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+contract.methods.getData().call()
+    .then(result => {
+        console.log('Data from Smart Contract:', result);
+    })
+    .catch(error => {
+        console.error('Error reading data from Smart Contract:', error);
+    });
+
+
+Run the Script:
+
+node readContract.js
+
+
